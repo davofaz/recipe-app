@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './App.css';
 
 interface Recipe {
@@ -20,17 +20,20 @@ const App: React.FC = () => {
 
     try {
       // Perform API request using the search query
-      const response = await fetch(`API_ENDPOINT?search=${search}`);
-      const data = await response.json();
+        const response = await fetch(`https://api.spoonacular.com/recipes/search?apiKey=4afde5867b95408da83b5616319634e9&search=${search}`);
+        const data = await response.json();
 
       // Update the search results state
-      setSearchResults(data.hits);
+        setSearchResults(data.hits);
+
     } catch (error) {
       console.error('Error occurred during API request:', error);
     }
+ };
 
-    //setSearchResults([]);
-};
+    useEffect(() => {
+        console.log(searchResults);
+    }, [searchResults]);
 
 
   return (
@@ -51,6 +54,7 @@ const App: React.FC = () => {
 
           <div className="App-main">
               <p>Your results for: {search}</p>
+              
           </div>
     </div>
   );
