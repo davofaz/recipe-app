@@ -2,46 +2,45 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import './App.css';
 
 interface Recipe {
-    //value: string;
     readyInMinutes: number;
     sourceUrl: string;
     image: string;
     servings: number;
     id: number;
     title: string;
-    searchResults: null;
-    //cuisine: string;
-    //setCuisine: string;
+
+
 }
 
-const cuisines: string[] = [
-    'African',
-    'Asian',
-    'American',
-    'British',
-    'Cajun',
-    'Caribbean',
-    'Chinese',
-    'Eastern European',
-    'European',
-    'French',
-    'German',
-    'Greek',
-    'Indian',
-    'Irish',
-    'Italian',
-    'Japanese',
-    'Jewish',
-    'Korean',
-    'Latin American',
-    'Mediterranean',
-    'Mexican',
-    'Middle Eastern',
-    'Nordic',
-    'Southern',
-    'Spanish',
-    'Thai',
-    'Vietnamese'
+const cuisineOptions = [
+    { value: '', label: 'Select Cuisine' },
+    { value: 'African', label: 'African' },
+    { value: 'Asian', label: 'Asian' },
+    { value: 'American', label: 'American' }, 
+    { value: 'British', label: 'British' },
+    { value: 'Cajun', label: 'Cajun' },
+    { value: 'Caribbean', label: 'Caribbean' },
+    { value: 'Chinese', label: 'Chinese' },
+    { value: 'Eastern European', label: 'Eastern European' },
+    { value: 'European', label: 'European' },
+    { value: 'French', label: 'French' },
+    { value: 'German', label: 'German' },
+    { value: 'Greek', label: 'Greek' },
+    { value: 'Indian', label: 'Indian' },
+    { value: 'Irish', label: 'Irish' },
+    { value: 'Italian', label: 'Italian' },
+    { value: 'Japanese', label: 'Japanese' },
+    { value: 'Jewish', label: 'Jewish' },
+    { value: 'Korean', label: 'Korean' },
+    { value: 'Latin American', label: 'Latin American' },
+    { value: 'Mediterranean', label: 'Mediterranean' },
+    { value: 'Mexican', label: 'Mexican' },
+    { value: 'Middle Eastern', label: 'Middle Eastern' },
+    { value: 'Nordic', label: 'Nordic' },
+    { value: 'Southern', label: 'Southern' },
+    { value: 'Spanish', label: 'Spanish' },
+    { value: 'Thai', label: 'Thai' },
+    { value: 'Vietnamese', label: 'Vietnamese' },
 ];
 
 
@@ -61,15 +60,22 @@ const App: React.FC = () => {
 
     try {
       // Perform API request using the search query
-        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4afde5867b95408da83b5616319634e9&query=${search}&cuisine=${cuisine}`);
-        const data = await response.json();
+        const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
 
-      // Update the search results state
-        setSearchResults(data.results);
-
-    } catch (error) {
-      console.error('Error occurred during API request:', error);
-    }
+        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${search}&cuisine=${cuisine}`);
+          if (response.status === 200) {
+            const data = await response.json();
+            setSearchResults(data.results);
+            } else if (response.status === 404) {
+            // Handle 404 error
+            console.log('Unable to find device');
+            } else {
+            // Handle other error scenarios
+            console.log('Failed to fetch data');
+            }
+        } catch (error) {
+            console.error('Error occurred during API request:', error);
+        }
  };
 
     useEffect(() => {
@@ -92,11 +98,11 @@ const App: React.FC = () => {
                     onChange={handleSearch} 
                     placeholder="Search for a Recipe" 
                   />
-                  <select id="cuisine" value={cuisines} onChange={handleCuisineChange}>
+                  <select id="cuisine" value={cuisine} onChange={handleCuisineChange}>
                   <option value="">-- Select Cuisine --</option>
-                  {cuisines.map((cuisine) => (
-                      <option key={cuisine} value={cuisine}>
-                          {cuisine}
+                  {cuisineOptions.map(option => (
+                      <option key={option.value} value={option.value}>
+                          {option.label}
                       </option>
                   ))}
                   </select>
@@ -105,13 +111,19 @@ const App: React.FC = () => {
           </header>
 
           <div className="App-main">
+              {searchResults.length === 0 ? ( 
+                  <p>No results found</p>
+              ) : (
+            <>
               <p>Your results for: {search}</p>
               <ul>
                   {searchResults.map((recipe) => (
                       <li key={recipe.id}>{recipe.title}</li>
                   ))}
               </ul>
-              
+             </>
+              )
+          }              
           </div>
     </div>
   );
