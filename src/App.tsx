@@ -79,18 +79,29 @@ const App: React.FC = () => {
  };
 
     useEffect(() => {
-        //console.log(searchResults);
+        console.log(searchResults);
     }, [searchResults]);
 
     const handleCuisineChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setCuisine(e.target.value);
     }
 
+    const handleClearResults = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setSearch('');
+        setCuisine('');
+        setSearchResults([]); 
+
+        setTimeout(() => {
+            console.log('cleared');
+        }, 0);
+    };
+
   return (
     <div className="App">
           <header className="App-header">
               <h1 className="text-2xl">Recipe Finder</h1>
-              <form onSubmit={handleSubmit} role="search">
+              <form onSubmit={handleSubmit} onReset={handleClearResults} role="search">
                   <input 
                       type="text"
                     name="search" 
@@ -106,8 +117,10 @@ const App: React.FC = () => {
                       </option>
                   ))}
                   </select>
-                  <button type="submit" className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Submit</button>
-                  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Clear</button>
+                  <button type="submit" className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Submit</button>
+                  <button
+                      type="reset"
+                      className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Clear</button>
               </form>
           </header>
 

@@ -43,3 +43,22 @@ it('should fetch and display search results', async () => {
     });
     
 });
+
+it('search state is cleared on button click', () => {
+    render(<App />);
+
+    const searchInput = screen.getByPlaceholderText('Search for a Recipe') as HTMLInputElement;
+    const clearButton = screen.getByText('Clear');
+
+    // Simulate user input
+    fireEvent.change(searchInput, { target: { value: 'Pizza' } });
+
+    // Verify search state is updated
+    expect(searchInput.value).toBe('Pizza');
+
+    // Simulate button click
+    fireEvent.click(clearButton);
+
+    // Verify search state is cleared
+    expect(searchInput.value).toBe('');
+});
