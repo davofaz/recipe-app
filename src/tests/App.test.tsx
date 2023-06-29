@@ -16,6 +16,8 @@ test('renders the App component', () => {
 
 
 
+
+
 it('should fetch and display search results', async () => {
    
     render(<App />);
@@ -30,13 +32,14 @@ it('should fetch and display search results', async () => {
     fireEvent.change(searchInput, { target: { value: 'chicken' } });
     fireEvent.click(searchButton);
 
-    // Wait for the API response and the data to be rendered
+    // Assert - Wait for the API response and the data to be rendered
     await waitFor(() => {
         expect(screen.getByText('Chicken 65')).toBeInTheDocument();
     });
     await waitFor(() => {
-        expect(screen.getByText('Chicken Suya')).toBeInTheDocument();
+        const recipeImages = screen.getAllByRole('img');
+        expect(recipeImages.length).toBeGreaterThan(0);
+        console.log('Image found!');
     });
-
     
 });

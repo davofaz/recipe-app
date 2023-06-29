@@ -8,12 +8,12 @@ export const handlers = [
         const mockData = {
             results: [
                 // Define your mock data here
-                { id: 637876, title: 'Chicken 65' },
-                { id: 716342, title: 'Chicken Suya' },
+                { id: 637876, title: 'Chicken 65', image: 'https://spoonacular.com/recipeImages/637876-312x231.jpg' },
+                { id: 716342, title: 'Chicken Suya', image: 'https://spoonacular.com/recipeImages/716342-312x231.jpg' },
             ],
         };
 
-        console.log('Mock Data:', mockData);
+        //console.log('Mock Data:', mockData);
 
         if (query === 'success') {
             return res(

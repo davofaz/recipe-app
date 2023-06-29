@@ -79,7 +79,7 @@ const App: React.FC = () => {
  };
 
     useEffect(() => {
-        console.log(searchResults);
+        //console.log(searchResults);
     }, [searchResults]);
 
     const handleCuisineChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -117,8 +117,8 @@ const App: React.FC = () => {
             <>
               <p>Your results for: {search}</p>
               <ul>
-                  {searchResults.map((recipe) => (
-                      <li key={recipe.id}>{recipe.title}</li>
+                              {searchResults.map((recipe) => (
+                                  <li key={recipe.id}>{recipe.title} <img src={recipe.image} alt={recipe.title} /></li>
                   ))}
               </ul>
              </>
