@@ -49,12 +49,14 @@ const App: React.FC = () => {
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<Recipe[]>([]);
     const [cuisine, setCuisine] = useState<string>('');
+    const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
     const handleSearch = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
     };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+        e.preventDefault();
+        setHasSubmitted(true);
 
     //Api request
 
@@ -90,7 +92,8 @@ const App: React.FC = () => {
         e.preventDefault();
         setSearch('');
         setCuisine('');
-        setSearchResults([]); 
+        setSearchResults([]);
+        setHasSubmitted(false);
 
         setTimeout(() => {
             console.log('cleared');
@@ -125,19 +128,20 @@ const App: React.FC = () => {
           </header>
 
           <div className="App-main">
-              {searchResults.length === 0 ? ( 
+              
+              {(hasSubmitted && searchResults.length === 0 && search !== '') && (
                   <p>No results found</p>
-              ) : (
-            <>
-              <p>Your results for: {search}</p>
-              <ul>
-                              {searchResults.map((recipe) => (
-                                  <li key={recipe.id}>{recipe.title} <img src={recipe.image} alt={recipe.title} /></li>
-                  ))}
-              </ul>
-             </>
-              )
-          }              
+              )}
+              {searchResults.length > 0 && (
+                  <>
+                      <p>Your results for: {search}</p>
+                      <ul>
+                          {searchResults.map((recipe) => (
+                              <li key={recipe.id}>{recipe.title} <img src={recipe.image} alt={recipe.title} /></li>
+                          ))}
+                      </ul>
+                  </>
+              )}
           </div>
     </div>
   );
