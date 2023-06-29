@@ -90,9 +90,9 @@ const App: React.FC = () => {
     <div className="App">
           <header className="App-header">
               <h1 className="text-2xl">Recipe Finder</h1>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} role="search">
                   <input 
-                    type="text" 
+                      type="text"
                     name="search" 
                     value={search} 
                     onChange={handleSearch} 
