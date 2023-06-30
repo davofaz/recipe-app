@@ -14,14 +14,6 @@ export const handlers = [
                     id: 634545,
                     title: 'Beans Hawaiian'
                 },
-                {
-                    readyInMinutes: 45,
-                    sourceUrl: "https://www.foodista.com/recipe/68ZDS47T/escarole-beans",
-                    image: "Escarole---Beans-642453.jpg",
-                    servings: 4,
-                    id: 642453,
-                    title: "Escarole & Beans"
-                }
 
             ]
         }

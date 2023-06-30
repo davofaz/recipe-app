@@ -131,7 +131,13 @@ const App: React.FC = () => {
                       <p>Your results for: {search}</p>
                       <ul>
                           {searchResults.map((recipe) => (
-                              <li key={recipe.id}>{recipe.title}</li>
+                              <li key={recipe.id}>
+                                  <ul>
+                                      <li>{recipe.title}</li>
+                                      <li><img src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></li>
+                                      <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><button>Link</button></a></li>
+                                  </ul>
+                              </li>
 
                           ))}
                       </ul>
