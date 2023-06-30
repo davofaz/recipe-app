@@ -95,18 +95,19 @@ const App: React.FC = () => {
 };
 
   return (
-    <div className="App">
+      <div className="App bg-slate-900 text-rose-500">
           <header className="App-header">
-              <h1 className="text-2xl">Recipe Finder</h1>
+              <h1 className="text-2xl p-10 text-center">Recipe Finder</h1>
               <form onSubmit={handleSubmit} onReset={handleClearResults} role="search">
                   <input 
-                      type="text"
+                    type="text"
+                    className="border border-black p-2 rounded mr-2"
                     name="search" 
                     value={search} 
                     onChange={handleSearch} 
                     placeholder="Search for a Recipe" 
                   />
-                  <select id="cuisine" value={cuisine} onChange={handleCuisineChange}>
+                  <select id="cuisine" value={cuisine} onChange={handleCuisineChange} className="border border-black p-2 rounded mr-2">
                   <option value="">-- Select Cuisine --</option>
                   {cuisineOptions.map(option => (
                       <option key={option.value} value={option.value}>
@@ -114,10 +115,10 @@ const App: React.FC = () => {
                       </option>
                   ))}
                   </select>
-                  <button type="submit" className="mr-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Submit</button>
+                  <button type="submit" className="mr-2 bg-transparent hover:bg-rose-500 text-rose-700 font-semibold hover:text-white py-2 px-4 border border-rose-500 hover:border-transparent rounded">Submit</button>
                   <button
                       type="reset"
-                      className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Clear</button>
+                      className="bg-transparent hover:bg-rose-500 text-rose-700 font-semibold hover:text-white py-2 px-4 border border-rose-500 hover:border-transparent rounded">Clear</button>
               </form>
           </header>
 
@@ -134,16 +135,16 @@ const App: React.FC = () => {
                               <li key={recipe.id}>
                                   <ul>
                                       <li>{recipe.title}</li>
-                                      <li><img src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></li>
+                                      <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
                                       <li>
                                           <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
                                               <button className="bg-transparent
-                                                                 hover:bg-blue-500
-                                                                 text-blue-700
+                                                                 hover:bg-rose-500
+                                                                 text-rose-700
                                                                  font-semibold
                                                                  hover:text-white
                                                                  py-2 px-4 border
-                                                                 border-blue-500
+                                                                 border-rose-500
                                                                  hover:border-transparent
                                                                  rounded">Link
                                               </button>
