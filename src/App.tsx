@@ -8,8 +8,6 @@ interface Recipe {
     servings: number;
     id: number;
     title: string;
-
-
 }
 
 const cuisineOptions = [
@@ -64,7 +62,7 @@ const App: React.FC = () => {
       // Perform API request using the search query
         const apiKey = process.env.REACT_APP_RECIPE_API_KEY;
 
-        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${search}&cuisine=${cuisine}`);
+        const response = await fetch(`https://api.spoonacular.com/recipes/search?apiKey=${apiKey}&query=${search}&cuisine=${cuisine}`);
           if (response.status === 200) {
             const data = await response.json();
             setSearchResults(data.results);
@@ -81,7 +79,7 @@ const App: React.FC = () => {
  };
 
     useEffect(() => {
-        console.log(searchResults);
+        //console.log(searchResults);
     }, [searchResults]);
 
     const handleCuisineChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -94,11 +92,7 @@ const App: React.FC = () => {
         setCuisine('');
         setSearchResults([]);
         setHasSubmitted(false);
-
-        setTimeout(() => {
-            console.log('cleared');
-        }, 0);
-    };
+};
 
   return (
     <div className="App">
@@ -137,7 +131,8 @@ const App: React.FC = () => {
                       <p>Your results for: {search}</p>
                       <ul>
                           {searchResults.map((recipe) => (
-                              <li key={recipe.id}>{recipe.title} <img src={recipe.image} alt={recipe.title} /></li>
+                              <li key={recipe.id}>{recipe.title}</li>
+
                           ))}
                       </ul>
                   </>

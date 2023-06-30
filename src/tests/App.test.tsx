@@ -1,64 +1,58 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 
+describe("App renders", () => { 
+    test('renders the App component', () => {
+        // Arrange
+        render(<App />);
 
-test('renders the App component', () => {
-    // Arrange
-    render(<App />);
+        // Act
+        const headingElement = screen.getByText(/Recipe Finder/i);
 
-    // Act
-    const headingElement = screen.getByText(/Recipe Finder/i);
+        // Assert
+        expect(headingElement).toBeInTheDocument();
+        //console.log('App name:', (headingElement).textContent)
 
-    // Assert
-    expect(headingElement).toBeInTheDocument();
-
+    });
 });
-
-
-
-
-
-it('should fetch and display search results', async () => {
+describe("API calls", () => { 
+    it('should fetch and display search results', async () => {
    
-    render(<App />);
+        render(<App />);
 
+        // Simulate user interaction by filling the search input and clicking the search button
+        const searchInput = screen.getByPlaceholderText('Search for a Recipe');
+        const searchButton = screen.getByRole('button', { name: 'Submit' });
 
-    //expect(screen.getByText('No results found')).toBeInTheDocument();
-
-    // Simulate user interaction by filling the search input and clicking the search button
-    const searchInput = screen.getByPlaceholderText('Search for a Recipe');
-    const searchButton = screen.getByRole('button', { name: 'Submit' });
-
-    fireEvent.change(searchInput, { target: { value: 'chicken' } });
-    fireEvent.click(searchButton);
-
-    // Assert - Wait for the API response and the data to be rendered
-    await waitFor(() => {
-        expect(screen.getByText('Chicken 65')).toBeInTheDocument();
-    });
-    await waitFor(() => {
-        const recipeImages = screen.getAllByRole('img');
-        expect(recipeImages.length).toBeGreaterThan(0);
-        console.log('Image found!');
-    });
+        fireEvent.change(searchInput, { target: { value: 'beans' } });
+        fireEvent.click(searchButton);
     
+        //console.log('before  waitfor: ')
+        const items = await screen.findAllByRole("listitem");
+        const itemTexts = items.map((item) => item.textContent);
+       // console.log(itemTexts);
+        expect(itemTexts).toContain('Beans Hawaiian');
+        expect(itemTexts).toContain('Escarole & Beans');    
+    });
 });
 
-it('search state is cleared on button click', () => {
-    render(<App />);
+describe("User Actions", () => { 
+    it('search state is cleared on button click', () => {
+        render(<App />);
 
-    const searchInput = screen.getByPlaceholderText('Search for a Recipe') as HTMLInputElement;
-    const clearButton = screen.getByText('Clear');
+        const searchInput = screen.getByPlaceholderText('Search for a Recipe') as HTMLInputElement;
+        const clearButton = screen.getByText('Clear');
 
-    // Simulate user input
-    fireEvent.change(searchInput, { target: { value: 'Pizza' } });
+        // Simulate user input
+        fireEvent.change(searchInput, { target: { value: 'Pizza' } });
 
-    // Verify search state is updated
-    expect(searchInput.value).toBe('Pizza');
+        // Verify search state is updated
+        expect(searchInput.value).toBe('Pizza');
 
-    // Simulate button click
-    fireEvent.click(clearButton);
+        // Simulate button click
+        fireEvent.click(clearButton);
 
-    // Verify search state is cleared
-    expect(searchInput.value).toBe('');
+        // Verify search state is cleared
+        expect(searchInput.value).toBe('');
+    });
 });
