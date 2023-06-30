@@ -135,7 +135,20 @@ const App: React.FC = () => {
                                   <ul>
                                       <li>{recipe.title}</li>
                                       <li><img src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></li>
-                                      <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><button>Link</button></a></li>
+                                      <li>
+                                          <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
+                                              <button className="bg-transparent
+                                                                 hover:bg-blue-500
+                                                                 text-blue-700
+                                                                 font-semibold
+                                                                 hover:text-white
+                                                                 py-2 px-4 border
+                                                                 border-blue-500
+                                                                 hover:border-transparent
+                                                                 rounded">Link
+                                              </button>
+                                          </a>
+                                      </li>
                                   </ul>
                               </li>
 
