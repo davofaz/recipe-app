@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { MdReadMore, MdOutlineFoodBank } from "react-icons/md";
+import { MdReadMore, MdOutlineFoodBank, MdOutlineTimer } from "react-icons/md";
 
 interface Recipe {
     readyInMinutes: number;
@@ -138,11 +138,12 @@ const App: React.FC = () => {
                                   <ul>
                                       <li><h2 className="mb-2">{recipe.title}</h2></li>
                                       <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img className="mb-2" src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
-                                      <li>
+                                      <li className="flex flex-row">
                                           <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
-                                              <button className="my-btn-rose"><MdReadMore size={24} />
+                                              <button className="my-btn-rose mb-6"><MdReadMore size={24} />
                                               </button>
                                           </a>
+                                          <div className="m-2 flex flex-row"><MdOutlineTimer size={24} /><p className="ml-2">Ready in: {recipe.readyInMinutes} mins </p></div>
                                       </li>
                                   </ul>
                               </li>
