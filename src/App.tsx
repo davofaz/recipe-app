@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { MdReadMore, MdOutlineFoodBank } from "react-icons/md";
 
 interface Recipe {
     readyInMinutes: number;
@@ -97,7 +98,7 @@ const App: React.FC = () => {
   return (
       <div className="App bg-slate-900 text-rose-500 flex-1 flex-col sm:w-full md:w-7/12  ml-auto mr-auto p-2">
           <header className="App-header sticky top-0 bg-slate-900">
-              <h1 className="text-2xl p-10 text-center">Recipe Finder</h1>
+              <h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1>
               <form onSubmit={handleSubmit} onReset={handleClearResults} role="search" className="flex flex-col">
                   <input 
                     type="text"
@@ -139,7 +140,7 @@ const App: React.FC = () => {
                                       <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img className="mb-2" src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
                                       <li>
                                           <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
-                                              <button className="my-btn-rose">Link
+                                              <button className="my-btn-rose"><MdReadMore size={24} />
                                               </button>
                                           </a>
                                       </li>
