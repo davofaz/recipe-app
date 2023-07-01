@@ -1,14 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { MdReadMore, MdOutlineFoodBank, MdOutlineTimer } from "react-icons/md";
+import { MdReadMore, MdOutlineFoodBank, MdOutlineTimer, MdOutlineGroups } from "react-icons/md";
 
-interface Recipe {
-    readyInMinutes: number;
-    sourceUrl: string;
-    image: string;
-    servings: number;
-    id: number;
-    title: string;
-}
+
 
 const cuisineOptions = [
     { value: '', label: 'Select Cuisine' },
@@ -92,7 +85,49 @@ const App: React.FC = () => {
         setCuisine('');
         setSearchResults([]);
         setHasSubmitted(false);
-};
+    };
+    interface Recipe {
+        readyInMinutes: number;
+        sourceUrl: string;
+        image: string;
+        servings: number;
+        id: number;
+        title: string;
+    }
+
+    interface RecipeInfoProps {
+        recipe: Recipe;
+    }
+
+    const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe }) => {
+        return (
+            <li>
+                <ul>
+                    <li><h2 className="mb-2">{recipe.title}</h2></li>
+                    <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img className="mb-2" src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
+                    <li className="flex flex-row">
+                        <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
+                            <button className="my-btn-rose mb-6"><MdReadMore size={24} /></button>
+                        </a>
+                        <div className="m-2 flex flex-row">
+                            {recipe.readyInMinutes && (
+                                <div className="flex flex-row">
+                                    <MdOutlineTimer size={24} />
+                                    <p className="ml-2">Ready in {recipe.readyInMinutes} mins</p>
+                                </div>
+                            )}
+                            {recipe.servings && (
+                                <div className="flex flex-row">
+                                    <MdOutlineGroups className="ml-3" size={24} />
+                                    <p className="ml-2">{recipe.servings} servings</p>
+                                </div>
+                            )}
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        )
+    };
 
 
   return (
@@ -134,20 +169,7 @@ const App: React.FC = () => {
                       <p className="mb-4">Your results for: {search}</p>
                       <ul>
                           {searchResults.map((recipe) => (
-                              <li key={recipe.id}>
-                                  <ul>
-                                      <li><h2 className="mb-2">{recipe.title}</h2></li>
-                                      <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img className="mb-2" src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
-                                      <li className="flex flex-row">
-                                          <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
-                                              <button className="my-btn-rose mb-6"><MdReadMore size={24} />
-                                              </button>
-                                          </a>
-                                          <div className="m-2 flex flex-row"><MdOutlineTimer size={24} /><p className="ml-2">Ready in: {recipe.readyInMinutes} mins </p></div>
-                                      </li>
-                                  </ul>
-                              </li>
-
+                              <RecipeInfo recipe={recipe} key={recipe.id} />
                           ))}
                       </ul>
                   </>
