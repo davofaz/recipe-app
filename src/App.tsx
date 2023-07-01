@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './App.css';
 
 interface Recipe {
     readyInMinutes: number;
@@ -94,20 +93,21 @@ const App: React.FC = () => {
         setHasSubmitted(false);
 };
 
+
   return (
-      <div className="App bg-slate-900 text-rose-500">
-          <header className="App-header">
+      <div className="App bg-slate-900 text-rose-500 flex-1 flex-col sm:w-full md:w-7/12  ml-auto mr-auto p-2">
+          <header className="App-header sticky top-0 bg-slate-900">
               <h1 className="text-2xl p-10 text-center">Recipe Finder</h1>
-              <form onSubmit={handleSubmit} onReset={handleClearResults} role="search">
+              <form onSubmit={handleSubmit} onReset={handleClearResults} role="search" className="flex flex-col">
                   <input 
                     type="text"
-                    className="border border-black p-2 rounded mr-2"
+                    className="border border-black p-2 rounded mb-2"
                     name="search" 
                     value={search} 
                     onChange={handleSearch} 
                     placeholder="Search for a Recipe" 
                   />
-                  <select id="cuisine" value={cuisine} onChange={handleCuisineChange} className="border border-black p-2 rounded mr-2">
+                  <select id="cuisine" value={cuisine} onChange={handleCuisineChange} className="border border-black p-2 rounded mb-2">
                   <option value="">-- Select Cuisine --</option>
                   {cuisineOptions.map(option => (
                       <option key={option.value} value={option.value}>
@@ -115,10 +115,11 @@ const App: React.FC = () => {
                       </option>
                   ))}
                   </select>
-                  <button type="submit" className="mr-2 bg-transparent hover:bg-rose-500 text-rose-700 font-semibold hover:text-white py-2 px-4 border border-rose-500 hover:border-transparent rounded">Submit</button>
+                  <button type="submit"
+                      className="my-btn-rose">Submit</button>
                   <button
                       type="reset"
-                      className="bg-transparent hover:bg-rose-500 text-rose-700 font-semibold hover:text-white py-2 px-4 border border-rose-500 hover:border-transparent rounded">Clear</button>
+                      className="my-btn-rose">Clear</button>
               </form>
           </header>
 
@@ -129,24 +130,16 @@ const App: React.FC = () => {
               )}
               {searchResults.length > 0 && (
                   <>
-                      <p>Your results for: {search}</p>
+                      <p className="mb-4">Your results for: {search}</p>
                       <ul>
                           {searchResults.map((recipe) => (
                               <li key={recipe.id}>
                                   <ul>
-                                      <li>{recipe.title}</li>
-                                      <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
+                                      <li><h2 className="mb-2">{recipe.title}</h2></li>
+                                      <li><a href={recipe.sourceUrl} target="_blank" rel="noreferrer"><img className="mb-2" src={`https://spoonacular.com/recipeImages/${recipe.image}`} alt={recipe.title} /></a></li>
                                       <li>
                                           <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
-                                              <button className="bg-transparent
-                                                                 hover:bg-rose-500
-                                                                 text-rose-700
-                                                                 font-semibold
-                                                                 hover:text-white
-                                                                 py-2 px-4 border
-                                                                 border-rose-500
-                                                                 hover:border-transparent
-                                                                 rounded">Link
+                                              <button className="my-btn-rose">Link
                                               </button>
                                           </a>
                                       </li>
