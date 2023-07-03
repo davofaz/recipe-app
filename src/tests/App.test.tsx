@@ -30,11 +30,16 @@ describe("API calls", () => {
         //console.log('before  waitfor: ')
         const items = await screen.findAllByRole("listitem");
         const itemTexts = items.map((item) => item.textContent);
-
         expect(itemTexts).toContain('Beans Hawaiian');
+
         const recipeImage = await screen.findAllByAltText("Beans Hawaiian");
         expect(recipeImage.length).toBeGreaterThan(0);
-       
+
+        const servings = await screen.findByText(/servings/i);
+        expect(servings).toBeInTheDocument();
+        const mins = await screen.findByText(/mins/i);
+        expect(mins).toBeInTheDocument();
+        //console.log((mins).textContent);
         const linkElements = await screen.findAllByRole("link");
         linkElements.forEach((linkElement) => {
             expect(linkElement).toHaveAttribute('href', 'https://www.foodista.com/recipe/FL3QKDTP/beans-hawaiian');

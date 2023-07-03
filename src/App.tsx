@@ -119,7 +119,7 @@ const App: React.FC = () => {
                             {recipe.servings && (
                                 <div className="flex flex-row">
                                     <MdOutlineGroups className="ml-3" size={24} />
-                                    <p className="ml-2">{recipe.servings} servings</p>
+                                    <p className="ml-2 recipe-servings">{recipe.servings} servings</p>
                                 </div>
                             )}
                         </div>
