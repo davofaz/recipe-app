@@ -119,7 +119,7 @@ const App: React.FC = () => {
                             {recipe.servings && (
                                 <div className="flex flex-row">
                                     <MdOutlineGroups className="ml-3" size={24} />
-                                    <p className="ml-2 recipe-servings">{recipe.servings} servings</p>
+                                    <p className="ml-2">{recipe.servings} servings</p>
                                 </div>
                             )}
                         </div>
@@ -151,11 +151,13 @@ const App: React.FC = () => {
                       </option>
                   ))}
                   </select>
-                  <button type="submit"
-                      className="my-btn-rose">Submit</button>
-                  <button
-                      type="reset"
-                      className="my-btn-rose">Clear</button>
+                  <div className="flex flex-row">
+                      <button type="submit"
+                          className="my-btn-rose flex-1 w-64 mr-2">Submit</button>
+                      <button
+                          type="reset"
+                              className="my-btn-rose flex-2 w-32">Clear</button>
+                  </div>
               </form>
           </header>
 

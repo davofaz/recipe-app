@@ -1,4 +1,5 @@
-import { render, screen, fireEvent, findAllByRole } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import  userEvent  from '@testing-library/user-event'
 import App from '../App';
 
 describe("App renders", () => { 
@@ -39,6 +40,7 @@ describe("API calls", () => {
         expect(servings).toBeInTheDocument();
         const mins = await screen.findByText(/mins/i);
         expect(mins).toBeInTheDocument();
+
         //console.log((mins).textContent);
         const linkElements = await screen.findAllByRole("link");
         linkElements.forEach((linkElement) => {
@@ -68,4 +70,6 @@ describe("User Actions", () => {
         // Verify search state is cleared
         expect(searchInput.value).toBe('');
     });
+
+
 });
