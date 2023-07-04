@@ -136,9 +136,8 @@ const App: React.FC = () => {
                                 
                                 <button
                                     onClick={handleBookmarkClick}
-                                    className="my-btn-rose m-2 mb-0 items-center"
+                                    className={`my-btn-rose m-2 mb-0 items-center ${isBookmarked ? "bg-rose-500" : ""}`}
                                 ><MdBookmarkAdd size={24} />
-                                {isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
                                 </button>
                                 
                                 <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
