@@ -1,38 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { MdReadMore, MdOutlineFoodBank, MdOutlineTimer, MdOutlineGroups, MdBookmarkAdd } from "react-icons/md";
+import { cuisineOptions } from './components/Options'
 
-
-
-const cuisineOptions = [
-    { value: '', label: 'Select Cuisine' },
-    { value: 'African', label: 'African' },
-    { value: 'Asian', label: 'Asian' },
-    { value: 'American', label: 'American' }, 
-    { value: 'British', label: 'British' },
-    { value: 'Cajun', label: 'Cajun' },
-    { value: 'Caribbean', label: 'Caribbean' },
-    { value: 'Chinese', label: 'Chinese' },
-    { value: 'Eastern European', label: 'Eastern European' },
-    { value: 'European', label: 'European' },
-    { value: 'French', label: 'French' },
-    { value: 'German', label: 'German' },
-    { value: 'Greek', label: 'Greek' },
-    { value: 'Indian', label: 'Indian' },
-    { value: 'Irish', label: 'Irish' },
-    { value: 'Italian', label: 'Italian' },
-    { value: 'Japanese', label: 'Japanese' },
-    { value: 'Jewish', label: 'Jewish' },
-    { value: 'Korean', label: 'Korean' },
-    { value: 'Latin American', label: 'Latin American' },
-    { value: 'Mediterranean', label: 'Mediterranean' },
-    { value: 'Mexican', label: 'Mexican' },
-    { value: 'Middle Eastern', label: 'Middle Eastern' },
-    { value: 'Nordic', label: 'Nordic' },
-    { value: 'Southern', label: 'Southern' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Thai', label: 'Thai' },
-    { value: 'Vietnamese', label: 'Vietnamese' },
-];
+export interface Bookmark  {
+    id: string;
+    text: string;
+    completed: boolean;
+    selectedColor: string;
+    backgroundColor: string;
+};
 
 
 const App: React.FC = () => {
@@ -41,6 +17,9 @@ const App: React.FC = () => {
     const [searchResults, setSearchResults] = useState<Recipe[]>([]);
     const [cuisine, setCuisine] = useState<string>('');
     const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
+
+    const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+    const [newBookmark, setNewBookmark] = useState('');
 
     const handleSearch = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
