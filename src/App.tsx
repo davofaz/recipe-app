@@ -2,13 +2,29 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { MdReadMore, MdOutlineFoodBank, MdOutlineTimer, MdOutlineGroups, MdBookmarkAdd } from "react-icons/md";
 import { cuisineOptions } from './components/Options'
 
+interface Recipe {
+    readyInMinutes: number;
+    sourceUrl: string;
+    image: string;
+    servings: number;
+    id: number;
+    title: string;
+}
+
+interface RecipeInfoProps {
+    recipe: Recipe;
+    bookmarks: Bookmark[];
+    onToggleBookmark: (updatedBookmarks: Bookmark[]) => void;
+}
 export interface Bookmark  {
-    id: string;
-    text: string;
-    completed: boolean;
-    selectedColor: string;
-    backgroundColor: string;
+    id: number;
+    title: string;
+    image: string;
+    servings: number;
+    readyInMinutes: number;
+    sourceUrl: string,
 };
+
 
 
 const App: React.FC = () => {
@@ -17,9 +33,7 @@ const App: React.FC = () => {
     const [searchResults, setSearchResults] = useState<Recipe[]>([]);
     const [cuisine, setCuisine] = useState<string>('');
     const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
-
     const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
-    const [newBookmark, setNewBookmark] = useState('');
 
     const handleSearch = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
@@ -65,20 +79,36 @@ const App: React.FC = () => {
         setSearchResults([]);
         setHasSubmitted(false);
     };
-    interface Recipe {
-        readyInMinutes: number;
-        sourceUrl: string;
-        image: string;
-        servings: number;
-        id: number;
-        title: string;
-    }
 
-    interface RecipeInfoProps {
-        recipe: Recipe;
-    }
+   const handleToggleBookmark = (updatedBookmarks: Bookmark[]) => {
+    setBookmarks(updatedBookmarks);
+    localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+  };
 
-    const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe }) => {
+    useEffect(() => {
+        const storedBookmarks = localStorage.getItem('bookmarks');
+        if (storedBookmarks) {
+          const parsedBookmarks = JSON.parse(storedBookmarks);
+          setBookmarks(parsedBookmarks);
+    }
+  }, []);
+    
+
+    const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe, bookmarks, onToggleBookmark }) => {
+      const isBookmarked = bookmarks.some((bookmark) => bookmark.id === recipe.id);
+      const handleBookmarkClick = () => {
+        if (isBookmarked) {
+          // Remove the recipe from bookmarks
+          const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.id !== recipe.id);
+          onToggleBookmark(updatedBookmarks);
+        } else {
+          // Add the recipe to bookmarks
+          const updatedBookmarks = [...bookmarks, recipe];
+          onToggleBookmark(updatedBookmarks);
+        }
+  };
+
+
         return (
             <li className="mb-5">
                 <ul>
@@ -103,9 +133,14 @@ const App: React.FC = () => {
                                 </div>
                             )}
                             <div className="flex flex-row place-content-evenly">
-                                <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
-                                    <button className="my-btn-rose m-2 mb-0 items-center"><MdBookmarkAdd size={24} /></button>
-                                </a>
+                                
+                                <button
+                                    onClick={handleBookmarkClick}
+                                    className="my-btn-rose m-2 mb-0 items-center"
+                                ><MdBookmarkAdd size={24} />
+                                {isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
+                                </button>
+                                
                                 <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
                                     <button className="my-btn-rose m-2 mb-0 items-center"><MdReadMore size={24} /></button>
                                 </a>
@@ -159,7 +194,12 @@ const App: React.FC = () => {
                       <p className="mb-4">Your results for: {search}</p>
                       <ul>
                           {searchResults.map((recipe) => (
-                              <RecipeInfo recipe={recipe} key={recipe.id} />
+                              <RecipeInfo 
+                                key={recipe.id}
+                                recipe={recipe}
+                                bookmarks={bookmarks}
+                                onToggleBookmark={handleToggleBookmark}
+                                />
                           ))}
                       </ul>
                   </>
