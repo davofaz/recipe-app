@@ -13,6 +13,12 @@ export interface RecipeInfoProps {
     onToggleBookmark: (updatedBookmarks: Bookmark[]) => void;
 }
 
+export interface BookmarkPageProps {
+    recipe: Recipe;
+    bookmarks: Bookmark[];
+    onToggleBookmark: (updatedBookmarks: Bookmark[]) => void;
+}
+
 export interface Bookmark  {
     id: number;
     title: string;
