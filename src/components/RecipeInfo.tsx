@@ -2,6 +2,7 @@ import { RecipeInfoProps } from '../interfaces/app.interfaces';
 import { MdReadMore, MdOutlineTimer, MdOutlineGroups, MdBookmarkAdd } from "react-icons/md";
 
 const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe, bookmarks, onToggleBookmark }) => {
+      // Check whether the current recipe is in bookmarks array
       const isBookmarked = bookmarks.some((bookmark) => bookmark.id === recipe.id);
       const handleBookmarkClick = () => {
         if (isBookmarked) {
@@ -43,7 +44,7 @@ const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe, bookmarks, onToggleBook
                                 
                                 <button
                                     onClick={handleBookmarkClick}
-                                    className={`my-btn-rose m-2 mb-0 items-center ${isBookmarked ? "bg-rose-500" : ""}`}
+                                    className={`my-btn-rose m-2 mb-0 items-center ${isBookmarked ? "bg-rose-500 text-rose-300" : ""}`}
                                 ><MdBookmarkAdd size={24} />
                                 </button>
                                 
