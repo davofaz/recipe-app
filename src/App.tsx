@@ -3,7 +3,7 @@ import { MdOutlineFoodBank} from "react-icons/md";
 import { cuisineOptions } from './components/Options';
 import { Recipe, Bookmark } from './interfaces/app.interfaces';
 import RecipeInfo from './components/RecipeInfo';
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 
 const App: React.FC = () => {
@@ -80,7 +80,7 @@ const App: React.FC = () => {
   return (
       <div className="App bg-slate-900 text-rose-500 flex-1 flex-col sm:w-full md:w-7/12  ml-auto mr-auto p-2">
           <header className="App-header sticky top-0 bg-slate-900">
-              <h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1>
+              <Link to={`/`}><h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1></Link>
               <form onSubmit={handleSubmit} onReset={handleClearResults} role="search" className="flex flex-col">
                   <input 
                     type="text"
