@@ -7,6 +7,10 @@ html, body {
 }
 
 @layer base {
+    p, h1 {
+        @apply text-rose-600;
+    }
+
     h1 {
         @apply text-2xl;
     }
