@@ -14,7 +14,7 @@ const router = createBrowserRouter([
      children: [
       {
         path: "bookmarks",
-        element: <BookmarkPage />
+             element: <BookmarkPage prop1="value1" prop2="value2" />
       },
     ],
   },

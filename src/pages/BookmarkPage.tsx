@@ -1,14 +1,17 @@
-// BookmarkPage.tsx
 import React from 'react';
-//import RecipeInfo from '../components/RecipeInfo';
-//import { BookmarkPageProps } from '../interfaces/app.interfaces';
 
-const BookmarkPage: React.FC = () => {
+interface BookmarkPageProps {
+    prop1: string;
+    prop2: string;
+}
+
+const BookmarkPage: React.FC<BookmarkPageProps> = ({ prop1, prop2 }) => {
     return (
 
         <div>
             <h2>Bookmarks</h2>
-
+            <p>Prop 1: {prop1}</p>
+            <p>Prop 2: {prop2}</p>
                 
         </div>
 
