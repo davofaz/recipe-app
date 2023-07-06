@@ -129,6 +129,7 @@ const App: React.FC = () => {
                   </>
               )}
           </div>
+          <Link to={`bookmarks`}>Bookmarks</Link>
           <Outlet />
     </div>
   );
