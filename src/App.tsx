@@ -3,6 +3,7 @@ import { MdOutlineFoodBank} from "react-icons/md";
 import { cuisineOptions } from './components/Options';
 import { Recipe, Bookmark } from './interfaces/app.interfaces';
 import RecipeInfo from './components/RecipeInfo';
+import { Outlet } from "react-router-dom";
 
 
 const App: React.FC = () => {
@@ -128,6 +129,7 @@ const App: React.FC = () => {
                   </>
               )}
           </div>
+          <Outlet />
     </div>
   );
 }
