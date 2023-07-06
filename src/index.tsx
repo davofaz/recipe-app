@@ -4,7 +4,7 @@ import { createBrowserRouter,  RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import ErrorPage from './pages/ErrorPage';
-//import BookmarkPage from './pages/BookmarkPage'
+import BookmarkPage from './pages/BookmarkPage'
 
 const router = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
      children: [
       {
         path: "bookmarks",
-        element: <div>Hello!</div>,
+        element: <BookmarkPage />
       },
     ],
   },
