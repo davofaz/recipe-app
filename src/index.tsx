@@ -4,12 +4,17 @@ import { createBrowserRouter,  RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import ErrorPage from './pages/ErrorPage';
+import BookmarkPage from './pages/BookmarkPage'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "bookmarks",
+    element: <div><p>Bookmarks</p></div>,
   },
 ]);
 
