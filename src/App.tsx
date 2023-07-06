@@ -129,7 +129,8 @@ const App: React.FC = () => {
                   </>
               )}
           </div>
-          <Link to={`bookmarks`}>Bookmarks</Link>
+           <Link to={`bookmarks`} state={bookmarks}>Bookmarks</Link> 
+          {/*<Link to={{ pathname: '/bookmarks', state: { bookmarks } } as any}>Bookmarks</Link> */}
           <Outlet />
     </div>
   );
