@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Bookmark } from '../interfaces/app.interfaces';
-import { MdReadMore } from "react-icons/md";
+import { MdReadMore, MdCancel } from "react-icons/md";
 
 
 
@@ -9,11 +9,15 @@ const BookmarkPage: React.FC = () => {
 
     const location = useLocation();
     const state = location.state as Bookmark[]; // Assuming the state is of type Bookmark[]
+    const navigate = useNavigate();
    
     console.log('Bookmarks:', state);
 
     return (
         <div>
+            <div className="w-100 flex"><button onClick={() => navigate('/')} className="flex flex-row w-[100px]"><p>Close</p> <MdCancel className="mt-1 ml-2" size={18} /></button></div>
+            
+            {state.length > 0 ? (
             <ul>
                 {state.map((bookmark, index) => (
                     
@@ -34,7 +38,10 @@ const BookmarkPage: React.FC = () => {
                         </li>
                     </ul>
                 ))}
-            </ul>
+                </ul>
+            ) : (
+                    <p>No bookmarks found.</p>
+            )}
         </div>
     );
 };

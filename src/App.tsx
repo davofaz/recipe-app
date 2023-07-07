@@ -81,6 +81,10 @@ const App: React.FC = () => {
       <div className="App bg-slate-900 text-rose-500 flex-1 flex-col sm:w-full md:w-7/12  ml-auto mr-auto p-2">
           <header className="App-header sticky top-0 bg-slate-900">
               <Link to={`/`}><h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1></Link>
+              <Link to={`bookmarks`} state={bookmarks}>Bookmarks</Link>
+              <Link to={`bookmarks2`} state={bookmarks}>Bookmarks2</Link>
+              {/*<Link to={{ pathname: '/bookmarks', state: { bookmarks:bookmarks }, }}>Bookmarks</Link> */}
+              <Outlet />
               <form onSubmit={handleSubmit} onReset={handleClearResults} role="search" className="flex flex-col">
                   <input 
                     type="text"
@@ -128,11 +132,7 @@ const App: React.FC = () => {
                       </ul>
                   </>
               )}
-          </div>
-          <Link to={`bookmarks`} state={bookmarks}>Bookmarks</Link>
-          <Link to={`bookmarks2`} state={bookmarks}>Bookmarks2</Link>
-          {/*<Link to={{ pathname: '/bookmarks', state: { bookmarks:bookmarks }, }}>Bookmarks</Link> */}
-          <Outlet /> 
+          </div>       
     </div>
   );
 }
