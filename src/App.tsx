@@ -93,7 +93,7 @@ const App: React.FC = () => {
                     name="search" 
                     value={search} 
                     onChange={handleSearch} 
-                    placeholder="Search for a Recipe" 
+                    placeholder="Search for a Recipe - try typing a main ingredient" 
                   />
                   <select id="cuisine" value={cuisine} onChange={handleCuisineChange} className="border border-black p-2 rounded mb-2">
                   <option value="">-- Select Cuisine --</option>
