@@ -43,12 +43,18 @@ const BookmarkPage: React.FC = () => {
                                 </li>
                                 <li className="ml-2 w-70">
                                     <h3>{bookmark.title}</h3>
-                                    <a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
-                                        <button className="my-btn-rose m-1 mb-0 items-center"><MdReadMore size={18} /></button>
-                                    </a>
-                                    <button className="my-btn-rose m-1 mb-0 items-center" onClick={() => handleRemoveBookmark(bookmark.id)}>
-                                        Remove
-                                    </button>
+                                    <ul className="flex flex-row mt-2">
+                                        <li>
+                                        <a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
+                                            <button className="my-btn-rose  items-center"><MdReadMore size={24} /></button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <button className="my-btn-rose mt-0 ml-3 items-center" onClick={() => handleRemoveBookmark(bookmark.id)}>
+                                                    Remove
+                                            </button>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>                           
                         </li>
