@@ -17,19 +17,22 @@ const BookmarkPage: React.FC = () => {
             <ul>
                 {state.map((bookmark, index) => (
                     
-                        <ul>
-                            
-                            <li key={index}><h2 className="mb-2">{bookmark.title}</h2></li>
-                            <li><a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
-                                  <img className="mb-2 object-cover h-60 w-80" src={`https://spoonacular.com/recipeImages/${bookmark.image}`} alt={bookmark.title} />
-                            </a>
-                            </li>
-                      
-                             <li><a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
-                                    <button className="my-btn-rose m-2 mb-0 items-center"><MdReadMore size={24} /></button>
+                    <ul key={bookmark.id}>
+                        <li>
+                            <ul className="flex flex-row">
+                                <li className="w-20"><a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
+                                        <img className="mb-2 object-cover h-[100px] w-[130px]" src={`https://spoonacular.com/recipeImages/${bookmark.image}`} alt={bookmark.title} />
                                     </a>
-                              </li>
-                        </ul>
+                                </li>
+                                <li className="ml-2 w-70">
+                                    <h3>{bookmark.title}</h3>
+                                    <a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
+                                        <button className="my-btn-rose m-1 mb-0 items-center"><MdReadMore size={18} /></button>
+                                    </a>
+                                </li>
+                            </ul>                           
+                        </li>
+                    </ul>
                 ))}
             </ul>
         </div>
