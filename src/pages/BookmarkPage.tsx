@@ -28,21 +28,23 @@ const BookmarkPage: React.FC = () => {
             <header className="App-header sticky top-0 bg-slate-900">
                 <Link to={`/`}><h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1></Link>
             </header>
-            <div className="w-100 flex"><button onClick={() => navigate('/')} className="flex flex-row w-[100px]"><p>Close</p> <MdCancel className="mt-1 ml-2" size={18} /></button></div>
-              
+            <div className="w-100 flex justify-end"><button onClick={() => navigate('/')} className="flex flex-row w-[100px]"><p>Close</p> <MdCancel className="mt-1 ml-2" size={18} /></button></div>
+            
             {state.length > 0 ? (
-            <ul>
+            
+                <ul>
+                    <h3>{bookmarks.length} {bookmarks.length === 1 && 'Bookmark'}{bookmarks.length !==1 && 'Bookmarks'}</h3>
                 {bookmarks.map((bookmark, index) => (
                     
                     <ul key={bookmark.id}>
                         <li>
-                            <ul className="flex flex-row">
-                                <li className="w-20"><a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
+                            <ul className="flex flex-row mt-3">
+                                <li className="w-1/5"><a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
                                         <img className="mb-2 object-cover h-[100px] w-[130px]" src={`https://spoonacular.com/recipeImages/${bookmark.image}`} alt={bookmark.title} />
                                     </a>
                                 </li>
-                                <li className="ml-2 w-70">
-                                    <h3>{bookmark.title}</h3>
+                                <li className="ml-2 w-4/5">
+                                    <h4>{bookmark.title}</h4>
                                     <ul className="flex flex-row mt-2">
                                         <li>
                                         <a href={bookmark.sourceUrl} target="_blank" rel="noreferrer">
