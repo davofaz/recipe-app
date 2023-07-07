@@ -130,8 +130,9 @@ const App: React.FC = () => {
               )}
           </div>
           <Link to={`bookmarks`} state={bookmarks}>Bookmarks</Link>
-          {/*<Link to={{ pathname: '/bookmarks', state: { bookmarks:bookmarks }, }}>Bookmarks</Link>  */}
-          <Outlet />
+          <Link to={`bookmarks2`} state={bookmarks}>Bookmarks2</Link>
+          {/*<Link to={{ pathname: '/bookmarks', state: { bookmarks:bookmarks }, }}>Bookmarks</Link> */}
+          <Outlet /> 
     </div>
   );
 }

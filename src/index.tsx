@@ -17,7 +17,12 @@ const router = createBrowserRouter([
              element: <BookmarkPage />
       },
     ],
-  },
+    },
+    {
+        path: "bookmarks2",
+        element: <BookmarkPage />,
+        errorElement: <ErrorPage />,
+    },
 ]);
 
 const root = ReactDOM.createRoot(
