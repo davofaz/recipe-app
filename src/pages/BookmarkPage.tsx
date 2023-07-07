@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Bookmark } from '../interfaces/app.interfaces';
 import { MdReadMore, MdCancel, MdOutlineFoodBank } from "react-icons/md";
 import { Link } from "react-router-dom";
+import BookmarkCounter from '../components/BookmarkCounter';
 
 
 
@@ -33,7 +34,7 @@ const BookmarkPage: React.FC = () => {
             {state.length > 0 ? (
             
                 <ul>
-                    <h3>{bookmarks.length} {bookmarks.length === 1 && 'Bookmark'}{bookmarks.length !==1 && 'Bookmarks'}</h3>
+                    <h3><BookmarkCounter bookmarks={bookmarks} /></h3>
                 {bookmarks.map((bookmark, index) => (
                     
                     <ul key={bookmark.id}>
