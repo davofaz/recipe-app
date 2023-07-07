@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { MdOutlineFoodBank} from "react-icons/md";
+import { MdOutlineFoodBank, MdBookmark } from "react-icons/md";
 import { cuisineOptions } from './components/Options';
 import { Recipe, Bookmark } from './interfaces/app.interfaces';
 import RecipeInfo from './components/RecipeInfo';
@@ -82,7 +82,7 @@ const App: React.FC = () => {
           <header className="App-header sticky top-0 bg-slate-900">
               <Link to={`/`}><h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1></Link>
               {/*<Link to={`bookmarks`} state={bookmarks}>Bookmarks</Link>*/}
-              <Link to={`bookmarks2`} state={bookmarks}>Bookmarks</Link>
+              {bookmarks.length > 0 && (<Link to={`bookmarks2`} state={bookmarks} className="flex flex-row mb-2"><MdBookmark size={24} /> {bookmarks.length} {bookmarks.length === 1 && 'Bookmark'}{bookmarks.length !== 1 && 'Bookmarks'}</Link>)}
               {/*<Link to={{ pathname: '/bookmarks', state: { bookmarks:bookmarks }, }}>Bookmarks</Link> */}
               <Outlet />
               <form onSubmit={handleSubmit} onReset={handleClearResults} role="search" className="flex flex-col">
