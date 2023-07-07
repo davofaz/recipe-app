@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Bookmark } from '../interfaces/app.interfaces';
-import { MdReadMore, MdCancel } from "react-icons/md";
+import { MdReadMore, MdCancel, MdOutlineFoodBank } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 
 
@@ -14,9 +15,12 @@ const BookmarkPage: React.FC = () => {
     console.log('Bookmarks:', state);
 
     return (
-        <div>
+
+        <div className="App bg-slate-900 text-rose-500 flex-1 flex-col sm:w-full md:w-7/12  ml-auto mr-auto p-2">
+            <header className="App-header sticky top-0 bg-slate-900"><Link to={`/`}><h1 className="text-2xl p-5 text-center flex flex-row-reverse">Recipe Finder<MdOutlineFoodBank size={34} /></h1></Link>
+            </header>
             <div className="w-100 flex"><button onClick={() => navigate('/')} className="flex flex-row w-[100px]"><p>Close</p> <MdCancel className="mt-1 ml-2" size={18} /></button></div>
-            
+              
             {state.length > 0 ? (
             <ul>
                 {state.map((bookmark, index) => (
