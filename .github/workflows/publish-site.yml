@@ -1,0 +1,42 @@
+name: Deploy to gh-pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Set Secret
+        env:
+          MY_SECRET: ${{ secrets.REACT_APP_RECIPE_API_KEY }}
+        run: echo "REACT_APP_RECIPE_API_KEY=${REACT_APP_RECIPE_API_KEY}" >> $GITHUB_ENV
+
+      - name: Print Environment Variable
+        run: echo "The value of REACT_APP_RECIPE_API_KEY is ${{ secrets.REACT_APP_RECIPE_API_KEY }}"
+
+      - name: Clear Npm cache
+        run: npm cache clean
+                
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.PAT_TOKEN }}
+          publish_dir: ./build
