@@ -1,27 +1,39 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { HashRouter as Router } from 'react-router-dom';
 import App from '../App';
 
 describe("App renders", () => { 
     test('renders the App component', () => {
         // Arrange
-        render(<App />);
+        render(
+            <Router>
+                <App />
+            </Router>
+            );
 
         // Act
-        const headingElement = screen.getByText(/Recipe Finder/i);
+        const headingElement = screen.getByText('My Recipe Finder');
 
         // Assert
         expect(headingElement).toBeInTheDocument();
         //console.log('App name:', (headingElement).textContent)
 
     });
+
 });
+
+
 describe("API calls", () => { 
     it('should fetch and display search results', async () => {
    
-        render(<App />);
+         render(
+            <Router>
+                <App />
+            </Router>
+            );
 
         // Simulate user interaction by filling the search input and clicking the search button
-        const searchInput = screen.getByPlaceholderText('Search for a Recipe');
+        const searchInput = screen.getByPlaceholderText(/Search for a Recipe/i);
         const searchButton = screen.getByRole('button', { name: 'Submit' });
 
         fireEvent.change(searchInput, { target: { value: 'beans' } });
@@ -41,20 +53,31 @@ describe("API calls", () => {
         expect(mins).toBeInTheDocument();
 
         //console.log((mins).textContent);
-        const linkElements = await screen.findAllByRole("link");
-        linkElements.forEach((linkElement) => {
-            expect(linkElement).toHaveAttribute('href', 'https://www.foodista.com/recipe/FL3QKDTP/beans-hawaiian');
+        const linkElements = await screen.findAllByRole('link');
+        const filteredLinks = linkElements.filter((linkElement) =>
+        linkElement.className.includes('recipe-link')
+        );
+
+        filteredLinks.forEach((linkElement) => {
+          expect(linkElement).toHaveAttribute(
+            'href',
+            'https://www.foodista.com/recipe/FL3QKDTP/beans-hawaiian'
+          );
         });
-        
+        //console.log('LINK ELEMENTS' , filteredLinks);
 
     });
 });
 
 describe("User Actions", () => { 
     it('search state is cleared on button click', () => {
-        render(<App />);
+         render(
+            <Router>
+                <App />
+            </Router>
+            );
 
-        const searchInput = screen.getByPlaceholderText('Search for a Recipe') as HTMLInputElement;
+        const searchInput = screen.getByPlaceholderText('Search for a Recipe - try typing a main ingredient') as HTMLInputElement;
         const clearButton = screen.getByText('Clear');
 
         // Simulate user input
@@ -72,3 +95,5 @@ describe("User Actions", () => {
 
 
 });
+
+
