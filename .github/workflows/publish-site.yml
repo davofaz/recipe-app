@@ -25,10 +25,7 @@ jobs:
 
       - name: Print Environment Variable
         run: echo "The value of REACT_APP_RECIPE_API_KEY is ${{ secrets.REACT_APP_RECIPE_API_KEY }}"
-
-      - name: Clear Npm cache
-        run: npm cache clean
-                
+             
       - name: Install dependencies
         run: npm install
 
