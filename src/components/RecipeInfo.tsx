@@ -48,7 +48,7 @@ const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe, bookmarks, onToggleBook
                                 ><MdBookmarkAdd size={24} />
                                 </button>
                                 
-                                <a href={recipe.sourceUrl} target="_blank" rel="noreferrer">
+                                <a href={recipe.sourceUrl} className="recipe-link" target="_blank" rel="noreferrer">
                                     <button className="my-btn-rose m-2 mb-0 items-center"><MdReadMore size={24} /></button>
                                 </a>
                             </div> 
