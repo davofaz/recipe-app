@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Bookmark } from '../interfaces/app.interfaces';
-import { MdReadMore, MdCancel, MdOutlineFoodBank } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { MdReadMore, MdCancel } from "react-icons/md";
 import BookmarkCounter from '../components/BookmarkCounter';
 import TitleComponent from '../components/TitleComponent';
 
