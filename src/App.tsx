@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { MdOutlineFoodBank, MdBookmark } from "react-icons/md";
+import { MdBookmark } from "react-icons/md";
 import { cuisineOptions } from './components/Options';
 import { Recipe, Bookmark } from './interfaces/app.interfaces';
 import RecipeInfo from './components/RecipeInfo';
