@@ -44,7 +44,7 @@ const BookmarkPage: React.FC = () => {
                                         <img className="mb-2 object-cover h-[100px] w-[130px]" src={`https://spoonacular.com/recipeImages/${bookmark.image}`} alt={bookmark.title} />
                                     </a>
                                 </li>
-                                <li className="ml-4 w-4/5">
+                                <li className="pl-4 w-4/5">
                                     <h4>{bookmark.title}</h4>
                                     <ul className="flex flex-row mt-2">
                                         <li>
