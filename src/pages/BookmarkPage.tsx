@@ -14,7 +14,7 @@ const BookmarkPage: React.FC = () => {
     const navigate = useNavigate();
     const [bookmarks, setBookmarks] = useState<Bookmark[]>(state);
    
-    console.log('Bookmarks:', state);
+    //console.log('Bookmarks:', state);
 
     const handleRemoveBookmark = (id: number) => {
         const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.id !== id);
@@ -29,7 +29,7 @@ const BookmarkPage: React.FC = () => {
             <header className="App-header sticky top-0 bg-slate-900">
             <TitleComponent title="My Bookmarks" />
             </header>
-            <div className="w-100 flex justify-end"><button onClick={() => navigate('/')} className="flex flex-row w-[100px]"><p>Close</p> <MdCancel className="mt-1 ml-2" size={18} /></button></div>
+            <div className="w-100 flex justify-end"><button onClick={() => navigate('/')} className="flex flex-row w-[100px] my-btn-rose items-center">Close <MdCancel className="mt-1 ml-2" size={18} /></button></div>
             
             {state.length > 0 ? (
             
@@ -44,7 +44,7 @@ const BookmarkPage: React.FC = () => {
                                         <img className="mb-2 object-cover h-[100px] w-[130px]" src={`https://spoonacular.com/recipeImages/${bookmark.image}`} alt={bookmark.title} />
                                     </a>
                                 </li>
-                                <li className="ml-2 w-4/5">
+                                <li className="ml-4 w-4/5">
                                     <h4>{bookmark.title}</h4>
                                     <ul className="flex flex-row mt-2">
                                         <li>

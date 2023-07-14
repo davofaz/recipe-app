@@ -81,7 +81,12 @@ const App: React.FC = () => {
           <header className="App-header sticky top-0 bg-slate-900">
             <TitleComponent title="My Recipe Finder"/>
               
-              {bookmarks.length > 0 && (<Link to={`bookmarks`} state={bookmarks} className="flex flex-row mb-2"><MdBookmark size={24} /><BookmarkCounter bookmarks={bookmarks} /></Link>)}
+              {bookmarks.length > 0 && (
+                  <Link to={`bookmarks`} state={bookmarks} className="flex flex-row mb-2">
+                    <button className="my-btn-rose flex flex-row items-center">
+                        <MdBookmark size={24} /><BookmarkCounter bookmarks={bookmarks} />
+                    </button>
+               </Link>)}
           
               <Outlet />
               <form onSubmit={handleSubmit} onReset={handleClearResults} role="search" className="flex flex-col">
