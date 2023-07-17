@@ -38,7 +38,7 @@ describe("API calls", () => {
 
         fireEvent.change(searchInput, { target: { value: 'beans' } });
         fireEvent.click(searchButton);
-    
+   
         //console.log('before  waitfor: ')
         const items = await screen.findAllByRole("listitem");
         const itemTexts = items.map((item) => item.textContent);
@@ -65,7 +65,7 @@ describe("API calls", () => {
           );
         });
         //console.log('LINK ELEMENTS' , filteredLinks);
-
+        
     });
 });
 
@@ -92,6 +92,38 @@ describe("User Actions", () => {
         // Verify search state is cleared
         expect(searchInput.value).toBe('');
     });
+
+    it('bookmark is added when bookmark button is clicked', async () => {
+        render(
+            <Router>
+                <App />
+            </Router>
+        );
+
+       // Simulate user interaction by filling the search input and clicking the search button
+        const searchInput = screen.getByPlaceholderText(/Search for a Recipe/i);
+        const searchButton = screen.getByRole('button', { name: 'Submit' });
+
+        fireEvent.change(searchInput, { target: { value: 'beans' } });
+        fireEvent.click(searchButton);
+
+        const items = await screen.findAllByRole("listitem");
+        const itemTexts = items.map((item) => item.textContent);
+        expect(itemTexts).toContain('Beans Hawaiian');
+       // console.log('ITEM TEXT: ', itemTexts)
+
+
+         //console.log('before  waitfor: ')
+        const bookmarkButton = await screen.getAllByRole('button')[2];
+        //console.log('Button: ', bookmarkButton)
+        expect(bookmarkButton.className).toContain('bookmark-button');
+        fireEvent.click(bookmarkButton);
+        const bookmarkCounter = screen.getByText('1 Bookmark')
+        expect(bookmarkCounter).toBeInTheDocument();
+        //console.log('Bookmark Counter Text: ', bookmarkCounter.textContent)
+        
+        
+    })
 
 
 });
