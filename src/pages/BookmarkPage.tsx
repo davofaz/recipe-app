@@ -34,7 +34,7 @@ const BookmarkPage: React.FC = () => {
             {state.length > 0 ? (
             
                 <ul>
-                    <h3><BookmarkCounter bookmarks={bookmarks} /></h3>
+                    <BookmarkCounter bookmarks={bookmarks} />
                 {bookmarks.map((bookmark, index) => (
                     
                     <ul key={bookmark.id}>

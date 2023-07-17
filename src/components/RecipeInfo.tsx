@@ -44,7 +44,7 @@ const RecipeInfo: React.FC<RecipeInfoProps> = ({ recipe, bookmarks, onToggleBook
                                 
                                 <button
                                     onClick={handleBookmarkClick}
-                                    className={`my-btn-rose m-2 mb-0 items-center ${isBookmarked ? "bg-rose-500 text-rose-300" : ""}`}
+                                    className={`bookmark-button my-btn-rose m-2 mb-0 items-center ${isBookmarked ? "bg-rose-500 text-rose-300" : ""}`}
                                 ><MdBookmarkAdd size={24} />
                                 </button>
                                 
